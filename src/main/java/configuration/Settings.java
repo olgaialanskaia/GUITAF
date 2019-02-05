@@ -5,6 +5,7 @@ import exceptions.UnknownBrowserException;
 import exceptions.UnknownPropertyException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -89,10 +90,10 @@ public class Settings {
     private WebDriver getDriver(BrowserType browserType) {
         switch (browserType) {
             case FIREFOX:
-                System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+                WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver();
             case CHROME:
-                System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+                WebDriverManager.chromedriver().setup();
                 return new ChromeDriver();
             default:
                 throw new UnknownBrowserException("Cannot create driver for unknown browser type.");
