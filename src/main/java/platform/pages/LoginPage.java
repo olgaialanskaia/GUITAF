@@ -1,13 +1,17 @@
 package platform.pages;
 
 import adapters.WebDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.log4testng.Logger;
 import util.WaitHelper;
+
+//import org.testng.log4testng.Logger;
+
 
 public class LoginPage extends AbstractPage {
 
@@ -20,7 +24,8 @@ public class LoginPage extends AbstractPage {
     @FindBy(css = ".form-input-validation.is-error")
     protected WebElement loginErrorMessage;
 
-    static Logger logger = Logger.getLogger(LoginPage.class);
+    private static final Logger logger = LogManager.getLogger(LoginPage.class.getName());
+    //private static final Logger logger = LoggerFactory.getLogger(LoginPage.class.getName());
 
     public static LoginPage initialize(WebDriver driver) {
         return PageFactory.initElements(driver, LoginPage.class);
