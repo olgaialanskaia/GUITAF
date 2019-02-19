@@ -16,22 +16,38 @@ import java.util.Properties;
 
 public class Settings {
 
-    private static final String SELENIUM_BROWSER = "selenium.browser";
     private static final String SELENIUM_PROPERTIES = "projectOlga.properties";
-    private static String stagingUrl;
+    private static final String SELENIUM_BROWSER = "selenium.browser";
     private static final String RETRY_COUNT = "retryCount";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private static String stagingUrl;
     private BrowserType browser;
+    private static String username;
+    private static String password;
     private static String retryCount;
 
     private Properties properties = new Properties();
 
-    public Settings() {
-        loadSettings();
-    }
+    public Settings() { loadSettings(); }
+
+    public WebDriver getDriver() { return getDriver(browser); }
+
+    public String getPropertyOrNull(String name) { return getProperty(name, false); }
+
+    public String getWordpressUrl() { return String.format("https://wordpress.com/wp-login.php", stagingUrl); }
+
+    public static int getRetryCount() { return Integer.parseInt(retryCount); }
+
+    public String getUsername() { return username; }
+
+    public String getPassword() { return password; }
 
     private void loadSettings() {
         properties = loadPropertiesFile();
         browser = BrowserType.Browser(getPropertyOrNull(SELENIUM_BROWSER));
+        username = getPropertyOrNull(USERNAME);
+        password = getPropertyOrNull(PASSWORD);
         retryCount = getPropertyOrNull(RETRY_COUNT);
     }
 
@@ -58,10 +74,6 @@ public class Settings {
         }
     }
 
-    public String getPropertyOrNull(String name) {
-        return getProperty(name, false);
-    }
-
     private String getProperty(String name, boolean forceExceptionIfNotDefined) {
         String result;
         if ((result = System.getProperty(name)) != null && result.length() > 0) {
@@ -83,10 +95,6 @@ public class Settings {
         }
     }
 
-    public WebDriver getDriver() {
-        return getDriver(browser);
-    }
-
     private WebDriver getDriver(BrowserType browserType) {
         switch (browserType) {
             case FIREFOX:
@@ -98,15 +106,6 @@ public class Settings {
             default:
                 throw new UnknownBrowserException("Cannot create driver for unknown browser type.");
         }
-    }
-
-    public String getWordpressUrl() {
-        return String.format("https://wordpress.com/wp-login.php", stagingUrl);
-    }
-
-
-    public static int getRetryCount() {
-        return Integer.parseInt(retryCount);
     }
 
 }

@@ -13,15 +13,15 @@ public class LoginTest {
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldLoginWithValidCredentials() {
 
-        WordpressPlatform.loginAs()
-                .regularUser();
+        WordpressPlatform.navigateToSite()
+                .loginWithValidCredentials();
     }
 
 
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldNotLoginWithInvalidCredentialsUnregisteredUser() {
 
-        WordpressPlatform.loginAs()
+        WordpressPlatform.navigateToSite()
                 .tryLoginWithInvalidCredentials();
 
 
@@ -30,7 +30,7 @@ public class LoginTest {
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldNotLoginWithNoCredentials() {
 
-        WordpressPlatform.loginAs()
+        WordpressPlatform.navigateToSite()
                 .tryLoginWithNoCredentials();
 
 

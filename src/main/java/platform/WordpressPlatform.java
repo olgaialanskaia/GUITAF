@@ -8,7 +8,7 @@ public class WordpressPlatform {
 
     static Settings settings = new Settings();
 
-    public static LoginPage loginAs() {
+    public static LoginPage navigateToSite() {
 
         String environment = settings.getWordpressUrl();
         WebDriverManager.getDriver().navigate().to(environment);

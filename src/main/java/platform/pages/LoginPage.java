@@ -1,6 +1,7 @@
 package platform.pages;
 
 import adapters.WebDriverManager;
+import configuration.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -44,17 +45,19 @@ public class LoginPage extends AbstractPage {
 
     }
 
-    public ReaderPage regularUser() {
-        String username = "olgaialanskaia";
-        String pwd = "newyorkdogjump";
+    public ReaderPage loginWithValidCredentials() {
 
-        logger.debug("Logging in with username/password: " + username + "/" + pwd);
+        Settings credentials = new Settings();
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
+        logger.debug("Logging in with username/password: " + username + "/" + password);
 
         usernameField
                 .sendKeys(username);
 
         passwordField
-                .sendKeys(pwd);
+                .sendKeys(password);
 
         loginButton
                 .click();
