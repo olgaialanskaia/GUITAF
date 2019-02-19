@@ -4,4 +4,4 @@ target/
 .idea/
 reports/
 test-output/
-*.projectOlga.properties
+projectOlga.properties
