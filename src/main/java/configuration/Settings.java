@@ -44,9 +44,15 @@ public class Settings {
     public String getPassword() { return password; }
 
     private void loadSettings() {
-        properties = loadPropertiesFile();
-        browser = BrowserType.Browser(getPropertyOrNull(SELENIUM_BROWSER));
+        // Preferentially load properties - first check environment variables, then properties file
         username = getPropertyOrNull(USERNAME);
+        if (username == null) {
+            // If no system variables found, load properties
+            properties = loadPropertiesFile();
+            username = getPropertyOrNull(USERNAME);
+        }
+
+        browser = BrowserType.Browser(getPropertyOrNull(SELENIUM_BROWSER));
         password = getPropertyOrNull(PASSWORD);
         retryCount = getPropertyOrNull(RETRY_COUNT);
     }
