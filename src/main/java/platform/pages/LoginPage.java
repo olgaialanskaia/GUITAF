@@ -18,10 +18,10 @@ public class LoginPage extends AbstractPage {
 
     @FindBy(id = "usernameOrEmail")
     protected WebElement usernameField;
+    @FindBy(css = ".button.form-button.is-primary")
+    protected WebElement continueButton;
     @FindBy(id = "password")
     protected WebElement passwordField;
-    @FindBy(css = ".button.is-primary")
-    protected WebElement loginButton;
     @FindBy(css = ".form-input-validation.is-error")
     protected WebElement loginErrorMessage;
 
@@ -40,7 +40,7 @@ public class LoginPage extends AbstractPage {
 
     public Boolean isLoaded() {
 
-        return loginButton
+        return continueButton
                 .isDisplayed();
 
     }
@@ -56,10 +56,15 @@ public class LoginPage extends AbstractPage {
         usernameField
                 .sendKeys(username);
 
+        continueButton
+                .click();
+
+        WaitHelper.waitForElementVisibility(getWebDriver(),passwordField, 1000);
+
         passwordField
                 .sendKeys(password);
 
-        loginButton
+        continueButton
                 .click();
 
         ReaderPage readerPage =
@@ -80,10 +85,15 @@ public class LoginPage extends AbstractPage {
         usernameField
                 .sendKeys(username);
 
+        continueButton
+                .click();
+
+        WaitHelper.waitForElementVisibility(getWebDriver(),passwordField, 1000);
+
         passwordField
                 .sendKeys(pwd);
 
-        loginButton
+        continueButton
                 .click();
 
         boolean exists = WaitHelper.elementExists(getWebDriver(), loginErrorMessage, 5);
@@ -99,7 +109,7 @@ public class LoginPage extends AbstractPage {
 
         logger.debug("Logging with no credentials, username and password fields left blank.");
 
-        loginButton
+        continueButton
                 .click();
 
         LoginPage loginPage =

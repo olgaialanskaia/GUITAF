@@ -1,19 +1,19 @@
 package testcases;
 
 import adapters.FalseFailAnalyzer;
-import adapters.WordpressTestSessionListener;
+import adapters.TestSessionListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import platform.WordpressPlatform;
+import platform.ApplicationUnderTest;
 
-@Listeners({WordpressTestSessionListener.class})
+@Listeners({TestSessionListener.class})
 
 public class LoginTest {
 
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldLoginWithValidCredentials() {
 
-        WordpressPlatform.navigateToSite()
+        ApplicationUnderTest.navigateToSite()
                 .loginWithValidCredentials();
     }
 
@@ -21,7 +21,7 @@ public class LoginTest {
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldNotLoginWithInvalidCredentialsUnregisteredUser() {
 
-        WordpressPlatform.navigateToSite()
+        ApplicationUnderTest.navigateToSite()
                 .tryLoginWithInvalidCredentials();
 
 
@@ -30,7 +30,7 @@ public class LoginTest {
     @Test(retryAnalyzer = FalseFailAnalyzer.class)
     public void shouldNotLoginWithNoCredentials() {
 
-        WordpressPlatform.navigateToSite()
+        ApplicationUnderTest.navigateToSite()
                 .tryLoginWithNoCredentials();
 
 

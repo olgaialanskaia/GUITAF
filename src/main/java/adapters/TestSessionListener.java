@@ -17,7 +17,7 @@ import org.testng.reporters.TestHTMLReporter;
 import java.io.File;
 import java.io.IOException;
 
-public class WordpressTestSessionListener extends TestHTMLReporter implements ITestListener {
+public class TestSessionListener extends TestHTMLReporter implements ITestListener {
 
     protected Settings settings = new Settings();
 

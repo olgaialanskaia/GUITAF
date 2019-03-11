@@ -4,7 +4,7 @@ import adapters.WebDriverManager;
 import configuration.Settings;
 import platform.pages.LoginPage;
 
-public class WordpressPlatform {
+public class ApplicationUnderTest {
 
     static Settings settings = new Settings();
 

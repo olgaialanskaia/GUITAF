@@ -20,4 +20,10 @@ public class WaitHelper {
         }
     }
 
+    public static void waitForElementVisibility(WebDriver driver, WebElement el, long time) {
+        WebDriverWait wait = new WebDriverWait(driver, time);
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(el));
+    }
+
 }
